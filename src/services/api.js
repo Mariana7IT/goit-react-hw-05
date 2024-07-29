@@ -1,45 +1,25 @@
 import axios from "axios";
 
-const API_KEY = "6ffe34a621c0f563c472b20c7293c512";
-const API_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZmZmZTNhNjIxYzBmNTYzYzQ3MmIyMG...";
+const API_KEY =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZmZhRhNjIxYzBmNTYzYz3MmIyMG3MjkzYzUxMiIsIm5iZlI6MTcyMjI2NTAzOC4yOTAwOTgsInN1YiI6IjY2Y2YtdhYmIwMlMzI2MTkzMDg1MjExZmU4NiIsInNjb3BlcyI6WyJhcGlfcmVhZDpGQ.qZiDMPT5DL7MjI8NJIbfh1kJPXvkmw9Ji26kKGQ81U";
 
-const axiosInstance = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+const BASE_URL = "https://api.themoviedb.org/3";
+export const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w300"; 
+
+const api = axios.create({
+  baseURL: BASE_URL,
   headers: {
-    Authorization: `Bearer ${API_TOKEN}`,
-  },
-  params: {
-    api_key: API_KEY,
-    language: "en-US",
+    Authorization: `Bearer ${API_KEY}`,
   },
 });
 
-export default axiosInstance;
-
 export const fetchTrendingMovies = async () => {
-  const response = await axiosInstance.get("/trending/movie/day");
-  return response.data.results;
+  try {
+    const response = await api.get("/trending/movie/day");
+    return response.data.results;
+  } catch (error) {
+    throw new Error(`Failed to fetch trending movies: ${error.message}`);
+  }
 };
 
-export const searchMovies = async (query) => {
-  const response = await axiosInstance.get("/search/movie", {
-    params: { query },
-  });
-  return response.data.results;
-};
-
-export const fetchMovieDetails = async (movieId) => {
-  const response = await axiosInstance.get(`/movie/${movieId}`);
-  return response.data;
-};
-
-export const fetchMovieCredits = async (movieId) => {
-  const response = await axiosInstance.get(`/movie/${movieId}/credits`);
-  return response.data.cast;
-};
-
-export const fetchMovieReviews = async (movieId) => {
-  const response = await axiosInstance.get(`/movie/${movieId}/reviews`);
-  return response.data.results;
-};
+export default api;
