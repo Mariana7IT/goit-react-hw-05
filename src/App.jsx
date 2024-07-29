@@ -3,10 +3,11 @@ import Navigation from "./components/Navigation/Navigation";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import HomePage from "./pages/HomePage/HomePage";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
-import s from "../src/index.css";
 import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
 import MovieReviews from "./components/MovieReviews/MovieReviews";
 import MovieCast from "./components/MovieCast/MovieCast";
+import "./index.css";
+import s from "./App.module.css";
 
 
 const App = () => {
