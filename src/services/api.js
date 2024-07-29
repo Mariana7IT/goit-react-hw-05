@@ -16,3 +16,30 @@ const axiosInstance = axios.create({
 });
 
 export default axiosInstance;
+
+export const fetchTrendingMovies = async () => {
+  const response = await axiosInstance.get("/trending/movie/day");
+  return response.data.results;
+};
+
+export const searchMovies = async (query) => {
+  const response = await axiosInstance.get("/search/movie", {
+    params: { query },
+  });
+  return response.data.results;
+};
+
+export const fetchMovieDetails = async (movieId) => {
+  const response = await axiosInstance.get(`/movie/${movieId}`);
+  return response.data;
+};
+
+export const fetchMovieCredits = async (movieId) => {
+  const response = await axiosInstance.get(`/movie/${movieId}/credits`);
+  return response.data.cast;
+};
+
+export const fetchMovieReviews = async (movieId) => {
+  const response = await axiosInstance.get(`/movie/${movieId}/reviews`);
+  return response.data.results;
+};

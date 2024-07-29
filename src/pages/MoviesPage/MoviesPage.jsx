@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { fetchTrendingMovies } from "/src/services/api.js";
 
 const MoviesPage = () => {
   return (
@@ -8,4 +9,4 @@ const MoviesPage = () => {
   )
 }
 
-export default MoviesPage
+export default MoviesPage;
