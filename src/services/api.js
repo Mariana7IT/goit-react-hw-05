@@ -1,13 +1,18 @@
 import axios from "axios";
 
-const ACCESS_KEY = "_AWSqd6Exv2zosauslRSNaiBmAFpbMmmvdpZT3zCez0";
+const API_KEY = "6ffe34a621c0f563c472b20c7293c512";
+const API_TOKEN =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2ZmZmZTNhNjIxYzBmNTYzYzQ3MmIyMG...";
 
-export const fetchImages = async (query, page = 1) => {
-  const response = await axios.get(`https://api.unsplash.com/search/photos`, {
-    params: { query, page, per_page: 12 },
-    headers: {
-      Authorization: `Client-ID ${ACCESS_KEY}`,
-    },
-  });
-  return response.data;
-};
+const axiosInstance = axios.create({
+  baseURL: "https://api.themoviedb.org/3",
+  headers: {
+    Authorization: `Bearer ${API_TOKEN}`,
+  },
+  params: {
+    api_key: API_KEY,
+    language: "en-US",
+  },
+});
+
+export default axiosInstance;
