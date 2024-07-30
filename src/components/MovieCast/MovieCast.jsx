@@ -3,7 +3,7 @@ import axios from "axios";
 import s from "./MovieCast.module.css";
 import { useParams } from "react-router-dom";
 import { BASE_POSTER_URL } from "/src/services/api.js";
-import { fetchCastById } from "../services/api"; 
+import { fetchCastById } from "/src/services/api.js"; 
 
 const MovieCast = () => {
   const { movieId } = useParams();
