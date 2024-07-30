@@ -42,7 +42,7 @@ export const fetchMovieReviewById = async (movieId) => {
     const response = await axios.get(
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`
     );
-    return response.data.results;
+    return response.data.results; 
   } catch (error) {
     throw new Error(`Failed to fetch movie reviews by ID: ${error.message}`);
   }
