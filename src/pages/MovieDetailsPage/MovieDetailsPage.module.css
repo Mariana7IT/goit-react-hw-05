@@ -25,29 +25,29 @@
   }
 }
 
-.movieDetails {
+.detailsContainer{
   display: flex;
   flex-direction: column;
   width: 450px;
 }
 
-.movieTitle {
+.detailsTitle {
   margin-bottom: 10px;
   font-size: 32px;
   font-weight: 600;
 }
 
-.descrTitle {
+.detailsSubtitle{
   margin-bottom: 5px;
   font-weight: 500;
 }
-.descrInfo {
+.detailsInfo {
   font-weight: 300;
   font-size: 20px;
   margin-bottom: 10px;
 }
 
-.infoTitle {
+.detailsSubtitle {
   margin-top: 40px;
   font-size: 30px;
   font-weight: 700;

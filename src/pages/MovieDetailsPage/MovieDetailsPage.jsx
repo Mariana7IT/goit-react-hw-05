@@ -65,12 +65,12 @@ const MovieDetailsPage = () => {
           width={250}
           alt="poster"
         />
-        <div className={s.movieDetails}>
-          <h2 className={s.movieTitle}>{movie.original_title}</h2>
-          <h3 className={s.descrTitle}>Rating</h3>
-          <p className={s.descrInfo}> {movie.vote_average}</p>
-          <h3 className={s.descrTitle}>Overview</h3>
-          <p className={s.descrInfo}>{movie.overview}</p>
+        <div className={s.detailsContainer}>
+          <h2 className={s.detailsTitle}>{movie.original_title}</h2>
+          <h3 className={s.detailsSubtitle}>Rating</h3>
+          <p className={s.detailsInfo}>{movie.vote_average}</p>
+          <h3 className={s.detailsSubtitle}>Overview</h3>
+          <p className={s.detailsInfo}>{movie.overview}</p>
         </div>
       </div>
       <h2 className={s.infoTitle}>Additional information </h2>
