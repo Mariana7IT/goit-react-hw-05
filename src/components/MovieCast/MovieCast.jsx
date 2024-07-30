@@ -3,49 +3,47 @@ import axios from "axios";
 import s from "./MovieCast.module.css";
 import { useParams } from "react-router-dom";
 import { BASE_POSTER_URL } from "/src/services/api.js";
+import { fetchCastById } from "../services/api"; 
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
+  const [error, setError] = useState(null);
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   useEffect(() => {
     const fetchCast = async () => {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}/credits`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_API_READ_ACCESS_TOKEN}`,
-            },
-          }
-        );
-        setCast(response.data.cast);
+        const data = await fetchCastById(movieId);
+        setCast(data.cast);
       } catch (error) {
-        console.error("Error fetching cast:", error);
+        setError(`Error fetching cast: ${error.message}`);
       }
     };
-
-    fetchCast();
+    if (movieId) fetchCast();
   }, [movieId]);
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
-    <div className={s.cast}>
+    <ul>
       {cast.map((actor) => (
-        <div key={actor.cast_id} className={s.actor}>
+        <li key={actor.cast_id}>
           <img
             src={
               actor.profile_path
-                ? `${BASE_POSTER_URL}${actor.profile_path}`
-                : "https://via.placeholder.com/150"
+                ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
+                : defaultImg
             }
             alt={actor.name}
-            className={s.actorImage}
           />
           <p>{actor.name}</p>
-          <p>as {actor.character}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
