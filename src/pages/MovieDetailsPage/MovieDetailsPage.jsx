@@ -1,11 +1,13 @@
-import React from 'react'
-
-import { useEffect, useState } from "react";
-import { useParams, Link, Outlet } from "react-router-dom";
-import { BASE_POSTER_URL } from "/src/services/api.js";
-import { fetchMovieById } from "/src/services/api.js";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  useParams,
+  Link,
+  Outlet,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
+import { BASE_POSTER_URL, fetchMovieById } from "/src/services/api.js";
 import s from "./MovieDetailsPage.module.css";
-
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -17,10 +19,10 @@ const MovieDetailsPage = () => {
   const backLinkHref = useRef(location.state || "/");
 
   const defaultImg =
-    "<https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg>";
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   const linkClass = ({ isActive }) => {
-    return s (s.link, isActive && s.active);
+    return `${s.link} ${isActive ? s.active : ""}`;
   };
 
   useEffect(() => {
@@ -42,6 +44,8 @@ const MovieDetailsPage = () => {
     return <div>No movie details found</div>;
   }
 
+  const { poster_path, original_title, vote_average, overview, genres } = movie;
+
   return (
     <>
       <h1 className={s.title}> Movie Details </h1>
@@ -52,7 +56,7 @@ const MovieDetailsPage = () => {
       </Link>
       <div className={s.content}>
         <img
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          src={poster_path ? `${BASE_POSTER_URL}${poster_path}` : defaultImg}
           alt={original_title}
           height={480}
         />
@@ -76,11 +80,10 @@ const MovieDetailsPage = () => {
         </div>
       </div>
       <div className={s.btn}>
-        <NavLink className={buildLinkClass} to={`/movies/${movieID}/cast`}>
+        <NavLink className={linkClass} to={`/movies/${movieId}/cast`}>
           Cast
         </NavLink>
-
-        <NavLink to={`/movies/${movieID}/reviews`} className={buildLinkClass}>
+        <NavLink className={linkClass} to={`/movies/${movieId}/reviews`}>
           Reviews
         </NavLink>
       </div>
@@ -90,4 +93,3 @@ const MovieDetailsPage = () => {
 };
 
 export default MovieDetailsPage;
-

@@ -35,6 +35,7 @@
   padding: 12px;
   margin-left: 24px;
   border-radius: 8px;
+  color: purple;
   &&:hover {
     background: #c8b1c8;
   }
@@ -42,5 +43,6 @@
   text-align: center;
 }
 .active {
+
   background: #f2d3f4;
 }
