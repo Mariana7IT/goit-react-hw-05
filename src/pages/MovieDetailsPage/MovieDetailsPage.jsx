@@ -2,49 +2,44 @@ import React from 'react'
 
 import { useEffect, useState } from "react";
 import { useParams, Link, Outlet } from "react-router-dom";
-import axios from "axios";
-import s from "./MovieDetailsPage.module.css";
 import { BASE_POSTER_URL } from "/src/services/api.js";
+import { fetchMovieById } from "/src/services/api.js";
+import s from "./MovieDetailsPage.module.css";
+
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+
+  const backLinkHref = useRef(location.state || "/");
+
+  const defaultImg =
+    "<https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg>";
+
+  const linkClass = ({ isActive }) => {
+    return clsx(s.link, isActive && s.active);
+  };
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const getMovieById = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_API_READ_ACCESS_TOKEN}`,
-            },
-          }
-        );
-        setMovie(response.data);
+        const movieById = await fetchMovieById(movieId);
+        setMovie(movieById);
       } catch (error) {
         setError(`Sorry, some mistake! ${error.message}`);
       } finally {
         setIsLoading(false);
       }
     };
-
-    fetchMovieDetails();
+    getMovieById();
   }, [movieId]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   if (!movie) {
-    return null;
+    return <div>No movie details found</div>;
   }
 
   return (
