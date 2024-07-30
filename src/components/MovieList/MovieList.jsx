@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import s from "../MovieList/MovieList.module.css";
+import s from "./MovieList.module.css";
 import { BASE_POSTER_URL } from "/src/services/api.js";
 
 const MovieList = ({ movies = [] }) => {

@@ -1,13 +1,22 @@
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+  list-style: none;
 }
 .items {
-  min-height: 450px;
-  border: 1px solid #ffff;
-  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  transition: transform 500ms ease;
+}
+.items:hover,
+.items:focus {
+  transform: scale(1.1);
+  transition: box-shadow 0.5s linear;
+  box-shadow: 0px 0px 24px 4px rgb(165, 38, 255);
 }
 
 .link {

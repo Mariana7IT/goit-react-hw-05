@@ -90,37 +90,7 @@ const MovieDetailsPage = () => {
     </>
   );
 };
-//     <div className={s.movieDetails}>
-//       <img
-//         src={
-//           movie.poster_path
-//             ? `${BASE_POSTER_URL}${movie.poster_path}`
-//             : "https://via.placeholder.com/300x450"
-//         }
-//         alt={movie.title}
-//         className={s.poster}
-//       />
-//       <div className={s.info}>
-//         <h2>{movie.title}</h2>
-//         <p>{movie.overview}</p>
-//         <p>Release date: {movie.release_date}</p>
-//         <p>Rating: {movie.vote_average}</p>
-//       </div>
-//       <div className={s.additional}>
-//         <h3>Additional Information</h3>
-//         <ul>
-//           <li>
-//             <Link to="cast">Cast</Link>
-//           </li>
-//           <li>
-//             <Link to="reviews">Reviews</Link>
-//           </li>
-//         </ul>
-//       </div>
-//       <Outlet />
-//     </div>
-//   );
-// };
+
 
 export default MovieDetailsPage;
 

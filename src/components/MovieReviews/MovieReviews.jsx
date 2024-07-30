@@ -23,7 +23,7 @@ const MovieReviews = () => {
   return (
     <div>
       <h2>Reviews</h2>
-         <ul className={s.reviewsList}>
+        <ul className={s.reviewsList}>
         {reviews.map((review) => (
           <li key={review.id}>
             <h3 className={s.reviewsTitle}>Author: {review.author}</h3>
