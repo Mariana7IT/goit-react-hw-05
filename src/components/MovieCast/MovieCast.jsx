@@ -14,7 +14,7 @@ const MovieCast = () => {
   useEffect(() => {
     const getCastById = async () => {
       try {
-        const castData = await fetchMovieCastById(movieId); // Використовуйте fetchMovieCastById
+        const castData = await fetchMovieCastById(movieId); 
         setCast(castData);
       } catch (error) {
         setError(`Sorry, some mistake! ${error.message}`);
