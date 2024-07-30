@@ -9,8 +9,9 @@
   font-weight: 700;
 }
 .nav {
+  list-style: none;
   display: flex;
-  gap: 12px;
+  gap: 20px;
 }
 
 .link {
@@ -18,6 +19,10 @@
   color: blueviolet;
 }
 
+.activeLink {
+  text-decoration: underline;
+  color: red; 
+}
 .active {
   color: rgb(243, 238, 240);
 }
