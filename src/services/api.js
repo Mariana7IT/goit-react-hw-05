@@ -4,7 +4,7 @@ const API_KEY = "6ffe34a621c0f563c472b20c7293c512";
 const BASE_URL = "https://api.themoviedb.org/3";
 const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
-const fetchTrendingMovies = async () => {
+export const fetchTrendingMovies = async () => {
   try {
     const response = await axios.get(
       `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`
@@ -59,9 +59,4 @@ export const fetchMovieByQuery = async (query) => {
   }
 };
 
-export {
-  API_KEY,
-  BASE_URL,
-  BASE_POSTER_URL,
- fetchTrendingMovies
- };
+export { API_KEY, BASE_URL, BASE_POSTER_URL };

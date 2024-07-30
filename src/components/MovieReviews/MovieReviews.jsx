@@ -6,32 +6,37 @@ import s from "./MovieReviews.module.css";
 const MovieReviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchMovieReviews = async () => {
+    const fetchReviews = async () => {
       try {
-        const response = await api.get(`/movie/${movieId}/reviews`);
-        setReviews(response.data.results);
+        const data = await fetchReviewsById(movieId);
+        setReviews(data.results);
       } catch (error) {
-        console.error("Error fetching movie reviews:", error);
+        setError(`Error fetching reviews: ${error.message}`);
       }
     };
-
-    fetchMovieReviews();
+    if (movieId) fetchReviews();
   }, [movieId]);
 
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (reviews.length === 0) {
+    return <div>No reviews found</div>;
+  }
+
   return (
-    <div>
-      <h2>Reviews</h2>
-        <ul className={s.reviewsList}>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <h3 className={s.reviewsTitle}>Author: {review.author}</h3>
-            <p className={s.reviewsContent}> {review.content}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {reviews.map((review) => (
+        <li key={review.id}>
+          <h3>{review.author}</h3>
+          <p>{review.content}</p>
+        </li>
+      ))}
+    </ul>
   );
 };
 

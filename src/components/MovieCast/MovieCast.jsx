@@ -3,47 +3,40 @@ import axios from "axios";
 import s from "./MovieCast.module.css";
 import { useParams } from "react-router-dom";
 import { BASE_POSTER_URL } from "/src/services/api.js";
-import { fetchCastById } from "/src/services/api.js"; 
+import { fetchMovieCastById } from "/src/services/api.js"; 
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
-  const defaultImg =
-    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchCast = async () => {
+    const getCastById = async () => {
       try {
-        const data = await fetchCastById(movieId);
-        setCast(data.cast);
+        const castData = await fetchMovieCastById(movieId); // Використовуйте fetchMovieCastById
+        setCast(castData);
       } catch (error) {
-        setError(`Error fetching cast: ${error.message}`);
+        setError(`Sorry, some mistake! ${error.message}`);
+      } finally {
+        setIsLoading(false);
       }
     };
-    if (movieId) fetchCast();
+    getCastById();
   }, [movieId]);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  if (isLoading) return <div>Loading cast...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
-    <ul>
-      {cast.map((actor) => (
-        <li key={actor.cast_id}>
-          <img
-            src={
-              actor.profile_path
-                ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}`
-                : defaultImg
-            }
-            alt={actor.name}
-          />
-          <p>{actor.name}</p>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <h2>Cast</h2>
+      <ul>
+        {cast.map((actor) => (
+          <li key={actor.id}>{actor.name}</li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
