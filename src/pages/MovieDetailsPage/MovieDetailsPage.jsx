@@ -48,37 +48,79 @@ const MovieDetailsPage = () => {
   }
 
   return (
-    <div className={s.movieDetails}>
-      <img
-        src={
-          movie.poster_path
-            ? `${BASE_POSTER_URL}${movie.poster_path}`
-            : "https://via.placeholder.com/300x450"
-        }
-        alt={movie.title}
-        className={s.poster}
-      />
-      <div className={s.info}>
-        <h2>{movie.title}</h2>
-        <p>{movie.overview}</p>
-        <p>Release date: {movie.release_date}</p>
-        <p>Rating: {movie.vote_average}</p>
+    <>
+      <h1 className={s.title}> Movie Details </h1>
+      {isLoading && <div>Movie details is loading...</div>}
+      {error && <div>Oops! Something went wrong</div>}
+      <Link className={s.goBack} to={backLinkHref.current}>
+        Go back
+      </Link>
+      <div className={s.content}>
+        <img
+          src={
+            movie.poster_path
+              ? `${BASE_POSTER_URL}${movie.poster_path}`
+              : defaultImg
+          }
+          width={250}
+          alt="poster"
+        />
+        <div className={s.movieDetails}>
+          <h2 className={s.movieTitle}>{movie.original_title}</h2>
+          <h3 className={s.descrTitle}>Rating</h3>
+          <p className={s.descrInfo}> {movie.vote_average}</p>
+          <h3 className={s.descrTitle}>Overview</h3>
+          <p className={s.descrInfo}>{movie.overview}</p>
+        </div>
       </div>
-      <div className={s.additional}>
-        <h3>Additional Information</h3>
-        <ul>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-      </div>
+      <h2 className={s.infoTitle}>Additional information </h2>
+      <ul className={s.linkList}>
+        <li>
+          <NavLink to={`cast`} className={linkClass}>
+            Movie Cast
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to={`reviews`} className={linkClass}>
+            Movie Reviews
+          </NavLink>
+        </li>
+      </ul>
       <Outlet />
-    </div>
+    </>
   );
 };
+//     <div className={s.movieDetails}>
+//       <img
+//         src={
+//           movie.poster_path
+//             ? `${BASE_POSTER_URL}${movie.poster_path}`
+//             : "https://via.placeholder.com/300x450"
+//         }
+//         alt={movie.title}
+//         className={s.poster}
+//       />
+//       <div className={s.info}>
+//         <h2>{movie.title}</h2>
+//         <p>{movie.overview}</p>
+//         <p>Release date: {movie.release_date}</p>
+//         <p>Rating: {movie.vote_average}</p>
+//       </div>
+//       <div className={s.additional}>
+//         <h3>Additional Information</h3>
+//         <ul>
+//           <li>
+//             <Link to="cast">Cast</Link>
+//           </li>
+//           <li>
+//             <Link to="reviews">Reviews</Link>
+//           </li>
+//         </ul>
+//       </div>
+//       <Outlet />
+//     </div>
+//   );
+// };
 
 export default MovieDetailsPage;
 

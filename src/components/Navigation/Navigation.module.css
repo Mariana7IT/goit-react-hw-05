@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color:hotpink;
+  color: aliceblue;
+  font-size: 26px;
+  font-weight: 700;
+}
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.link {
+  text-decoration: none;
+  color: blueviolet;
+}
+
+.active {
+  color: rgb(243, 238, 240);
+}
