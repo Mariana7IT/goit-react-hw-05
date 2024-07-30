@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import api from "/src/services/api.js";
+import { fetchTrendingMovies, fetchMovieById, fetchMovieCastById, fetchMovieReviewById, fetchMovieByQuery } from "/src/services/api.js";
 import MovieList from "/src/components/MovieList/MovieList";
 
 const MoviesPage = () => {

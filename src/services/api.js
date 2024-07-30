@@ -56,3 +56,12 @@ export const fetchMovieByQuery = async (query) => {
     throw new Error(`Failed to fetch movie by query: ${error.message}`);
   }
 };
+
+
+export default {
+  fetchTrendingMovies,
+  fetchMovieById,
+  fetchMovieCastById,
+  fetchMovieReviewById,
+  fetchMovieByQuery,
+};
