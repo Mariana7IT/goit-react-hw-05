@@ -27,20 +27,23 @@ export const fetchMovieById = async (movieId) => {
 };
 
 export const fetchMovieCastById = async (movieId) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`
-    );
-    return response.data.cast;
-  } catch (error) {
-    throw new Error(`Failed to fetch movie cast by ID: ${error.message}`);
-  }
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews`, {
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+    },
+  });
+  return response.data.results;
 };
 
 export const fetchMovieReviewById = async (movieId) => {
   try {
-    const response = await axios.get(
-      `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
+    const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews`, {
+      params: {
+        api_key: API_KEY,
+        language: "en-US",
+        page: 1,
+      },
+    });
     return response.data.results; 
   } catch (error) {
     throw new Error(`Failed to fetch movie reviews by ID: ${error.message}`);
