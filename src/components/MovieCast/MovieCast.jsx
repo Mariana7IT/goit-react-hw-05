@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { BASE_POSTER_URL } from "/src/services/api.js";
+import { BASE_URL } from "/src/services/api.js";
 import { fetchMovieCastById } from "/src/services/api.js"; 
 import s from "./MovieCast.module.css";
 

@@ -4,6 +4,8 @@ const API_KEY = "6ffe34a621c0f563c472b20c7293c512";
 const BASE_URL = "https://api.themoviedb.org/3";
 const BASE_POSTER_URL = "https://image.tmdb.org/t/p/w500";
 
+
+
 export const fetchTrendingMovies = async () => {
   try {
     const response = await axios.get(
@@ -27,12 +29,14 @@ export const fetchMovieById = async (movieId) => {
 };
 
 export const fetchMovieCastById = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
-    headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
-    },
-  });
-  return response.data.cast;
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
+    );
+    return response.data.cast;
+  } catch (error) {
+    throw new Error(`Failed to fetch movie cast: ${error.message}`);
+  }
 };
 
 export const fetchMovieReviewById = async (movieId) => {
@@ -44,7 +48,7 @@ export const fetchMovieReviewById = async (movieId) => {
         page: 1,
       },
     });
-    return response.data.results; 
+    return response.data.results;
   } catch (error) {
     throw new Error(`Failed to fetch movie reviews by ID: ${error.message}`);
   }
