@@ -57,40 +57,42 @@ const MovieDetailsPage = () => {
       </Link>
       <div className={s.content}>
         <img
-          src={
-            movie.poster_path
-              ? `${BASE_POSTER_URL}${movie.poster_path}`
-              : defaultImg
-          }
-          width={250}
-          alt="poster"
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt={original_title}
+          height={480}
         />
-        <div className={s.detailsContainer}>
-          <h2 className={s.detailsTitle}>{movie.original_title}</h2>
-          <h3 className={s.detailsSubtitle}>Rating</h3>
-          <p className={s.detailsInfo}>{movie.vote_average}</p>
-          <h3 className={s.detailsSubtitle}>Overview</h3>
-          <p className={s.detailsInfo}>{movie.overview}</p>
+        <div className={s.info}>
+          <h2>{original_title}</h2>
+          <p>User score: {(vote_average * 10).toFixed(0)}%</p>
+          <ul>
+            <li>
+              <h3>Overview</h3>
+              <p>{overview}</p>
+            </li>
+            <li>
+              <h3>Genres</h3>
+              <ul>
+                {genres.map((e) => (
+                  <li key={e.id}>{e.name}</li>
+                ))}
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
-      <h2 className={s.infoTitle}>Additional information </h2>
-      <ul className={s.linkList}>
-        <li>
-          <NavLink to={`cast`} className={linkClass}>
-            Movie Cast
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to={`reviews`} className={linkClass}>
-            Movie Reviews
-          </NavLink>
-        </li>
-      </ul>
+      <div className={s.btn}>
+        <NavLink className={buildLinkClass} to={`/movies/${movieID}/cast`}>
+          Cast
+        </NavLink>
+
+        <NavLink to={`/movies/${movieID}/reviews`} className={buildLinkClass}>
+          Rewiews
+        </NavLink>
+      </div>
       <Outlet />
     </>
   );
 };
-
 
 export default MovieDetailsPage;
 

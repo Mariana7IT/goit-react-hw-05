@@ -63,9 +63,5 @@ export {
   API_KEY,
   BASE_URL,
   BASE_POSTER_URL,
-  fetchTrendingMovies,
-  fetchMovieById,
-  fetchMovieCastById,
-  fetchMovieReviewById,
-  fetchMovieByQuery,
-};
+ fetchTrendingMovies
+ };
