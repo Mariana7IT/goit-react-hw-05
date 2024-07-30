@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import s from "./MovieCast.module.css";
 import { useParams } from "react-router-dom";
 import { BASE_POSTER_URL } from "/src/services/api.js";
 import { fetchMovieCastById } from "/src/services/api.js"; 
+import s from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -14,7 +14,7 @@ const MovieCast = () => {
   useEffect(() => {
     const getCastById = async () => {
       try {
-        const castData = await fetchMovieCastById(movieId); 
+        const castData = await fetchMovieCastById(movieId);
         setCast(castData);
       } catch (error) {
         setError(`Sorry, some mistake! ${error.message}`);
@@ -27,6 +27,8 @@ const MovieCast = () => {
 
   if (isLoading) return <div>Loading cast...</div>;
   if (error) return <div>{error}</div>;
+
+  if (cast.length === 0) return <div>No cast information available</div>;
 
   return (
     <div>

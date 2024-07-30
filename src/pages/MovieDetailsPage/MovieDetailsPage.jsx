@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import {
   useParams,
   Link,
-  Outlet,
   NavLink,
   useLocation,
+  Outlet,
 } from "react-router-dom";
 import { BASE_POSTER_URL, fetchMovieById } from "/src/services/api.js";
 import s from "./MovieDetailsPage.module.css";

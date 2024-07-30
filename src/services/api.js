@@ -27,12 +27,12 @@ export const fetchMovieById = async (movieId) => {
 };
 
 export const fetchMovieCastById = async (movieId) => {
-  const response = await axios.get(`${BASE_URL}/movie/${movieId}/reviews`, {
+  const response = await axios.get(`${BASE_URL}/movie/${movieId}/credits`, {
     headers: {
       Authorization: `Bearer ${API_TOKEN}`,
     },
   });
-  return response.data.results;
+  return response.data.cast;
 };
 
 export const fetchMovieReviewById = async (movieId) => {
