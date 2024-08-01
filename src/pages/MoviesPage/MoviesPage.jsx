@@ -1,20 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 import { fetchMovieByQuery } from "/src/services/api.js";
 import MovieList from "/src/components/MovieList/MovieList";
 import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query") || "";
   const [movies, setMovies] = useState([]);
 
-  const handleSearch = async () => {
-    try {
-      const movies = await fetchMovieByQuery(query);
-      setMovies(movies);
-    } catch (error) {
-      console.error("Failed to fetch movies:", error);
+  useEffect(() => {
+    if (query) {
+      const fetchMovies = async () => {
+        try {
+          const movies = await fetchMovieByQuery(query);
+          setMovies(movies);
+        } catch (error) {
+          console.error("Failed to fetch movies:", error);
+        }
+      };
+
+      fetchMovies();
     }
+  }, [query]);
+
+  const handleSearch = () => {
+    setSearchParams({ query });
   };
 
   return (
@@ -23,7 +35,7 @@ const MoviesPage = () => {
       <div className={s.wrapper}>
         <input
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => setSearchParams({ query: e.target.value })}
           className={s.form}
           placeholder="Type film's name..."
         />

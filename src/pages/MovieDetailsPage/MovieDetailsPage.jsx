@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   useParams,
   Link,
@@ -15,7 +15,7 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-  const backLinkHref = location.state?.from || "/";
+  const backLinkRef = useRef(location.state?.from || "/");
 
   const defaultImg =
     "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
@@ -49,7 +49,7 @@ const MovieDetailsPage = () => {
   return (
     <>
       <h1 className={s.title}>Movie Details</h1>
-      <Link className={s.goBack} to={backLinkHref}>
+      <Link className={s.goBack} to={backLinkRef.current}>
         Go back
       </Link>
       <div className={s.content}>
